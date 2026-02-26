@@ -7,19 +7,19 @@
     
 </head>
 <body>
-    <form action="/submit_feedback" method="POST">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="user_name"><br><br>
+    <div>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="user_name"><br><br>
 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="user_email"><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="user_email"><br><br>
 
-    <label for="feedback">Feedback:</label><br>
-    <textarea id="feedback" name="user_feedback" rows="4"></textarea><br><br>
-<button onclick="showAlert()">Click me</button>
+        <label for="feedback">Feedback:</label><br>
+        <textarea id="feedback" name="user_feedback" rows="4"></textarea><br><br>
+        <button onclick="showAlert()">Click me</button>
 
-    <button onclick="SubAlert()">Submit</button>
-</form>
+        <button onclick="SubAlert()">Submit</button>
+    </div>
 
     <script>
   function showAlert() {
