@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shade Palette</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        padding: 50px 20px;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+
+    /* ✅ Added padding + background + rounded corners */
+    .category {
+        margin-bottom: 60px;
+        padding: 30px;              /* NEW */
+        background: rgba(255,255,255,0.08); /* NEW */
+        border-radius: 20px;        /* NEW */
+        backdrop-filter: blur(12px);/* NEW */
+    }
+
+    .category-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+        padding: 10px 20px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 10px;
+        display: inline-block;
+        font-weight: bold;
+        color: aquamarine;
+    }
+
+    .palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .color-box {
+        height: 160px;
+        border-radius: 15px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        cursor: pointer;
+        transition: 0.4s ease;
+        position: relative;
+        color: white;
+        font-weight: bold;
+    }
+
+    .color-box:hover, .cement-color-box:hover {
+        transform: translateY(-10px);
+    }
+
+    .cement-color-box
+    {
+        height: 160px;
+        border-radius: 15px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        cursor: pointer;
+        transition: 0.3s ease;
+        position: relative;
+        color: black;
+        font-weight: bold;
+    }
+
+    .color-name {
+        font-size: 16px;
+    }
+
+    .color-code {
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    .copied {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.6);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .show {
+        opacity: 1;
+    }
+</style>
+</head>
+
+<body>
+
+<h1 style="color:#7fffd4;">Shades for Every Modality</h1>
+<div id="palette-container"></div>
+
+<script>
+
+const dcategory = [
+    { name: "Voilet *", hex: "#62007a" },
+    { name: "Dark Blue *", hex: "#0000b4" },
+    { name: "Holly Jolly *", hex: "#00ff6a" } ,
+    { name: "Sunny Yellow *", hex: "#ffff00"},  
+    { name: "Signal Red *", hex: "#ff0000" },  
+    { name: "Orange *", hex: "#ff7b00" },
+    { name: "Golden Brown", hex: "#da8920" },
+    { name: "Maroon", hex: "#800000" },    
+    { name: "Terracotta", hex: "#bd451d" },
+    { name: "Dark Brown", hex: "#63352B" },
+    { name: "Dark Green", hex: "#1E5C3C" },
+    { name: "Ming Red", hex: "#9D3133" },
+    { name: "Grey", hex: "#808080" },
+    { name: "Black", hex: "#000000" },
+
+  
+];
+
+const category1 = [
+    { name: "Magenta *", hex: "#FF00FF" },
+    ...dcategory,
+];
+    
+
+const category2 = [
+    
+    { name: "Nut Brown", hex: "#BF845D" },
+    ...dcategory,   
+];
+
+const category3 = [
+    { name: "Wallnut", hex: "#847059" },
+    { name: "Teak", hex: "#f3d1a8" },
+    { name: "White", hex: "#FFFFFF" }
+];
+
+
+const category4 = [
+    { name: "Super White", hex: "#FFFFFF" },
+    { name: "Off White", hex: "#FFFBD6" },
+    { name: "Bone White", hex: "#FFF8AF" },
+    { name: "Ivory", hex: "#FFFF8F" },
+    { name: "Mid Cream", hex: "#FFFF66" },    
+    { name: "Rose White", hex: "#ffe6c6"},
+    { name: "Pale Rose", hex: "#ffdbc6" },
+    { name: "Light Biscuit", hex: "#F5874F"},
+    { name: "Peach", hex: "#e29857" },
+    { name: "Bright Pink", hex: "#EF5086" },
+    { name: "Terracota", hex: "#C44A31" },
+    { name: "Apple White", hex: "#CCE7D4" },
+    { name: "Apple Green", hex: "#64B582" },
+    { name: "Aquamarine", hex: "#7fffd4" }, 
+    { name: "Sky Blue", hex: "#0098DA" },
+    { name: "Taj Grey", hex: "#8a7d06" },
+    { name: "Dholpur Stone", hex: "#885c1b"},
+    { name: "Silver Grey", hex: "#999999" },
+    { name: "Dove Grey", hex: "#666666" },
+    
+   
+];
+
+const categories = {
+    "Semi Gloss": category1,
+    "Matte Emulsion": category2,
+    "WoodFiller": category3,
+    "Cement Based Paint Shades": category4
+};
+
+const container = document.getElementById("palette-container");
+
+// for (let category in categories)
+Object.keys(categories).forEach((category,index)=>
+    {
+
+    const section = document.createElement("div");
+    section.classList.add("category");
+
+    const title = document.createElement("div");
+    title.classList.add("category-title");
+    title.innerText = category;
+
+
+    const palette = document.createElement("div");
+    palette.classList.add("palette");
+
+    categories[category].forEach((color) => {
+
+        
+        const box = document.createElement("div");
+        if(index==2||index==3)
+        {
+            box.classList.add("cement-color-box");
+        }
+        else
+            box.classList.add("color-box");
+        box.style.backgroundColor = color.hex;
+        
+
+        box.innerHTML = `
+            <div class="color-name">${color.name}</div>
+            <!-- //<div class="color-code">${color.hex}</div>  //-->
+            <span class="copied">Copied!</span>
+        `;
+
+        box.addEventListener("click", () => {
+            navigator.clipboard.writeText(color.hex);
+            const msg = box.querySelector(".copied");
+            msg.classList.add("show");
+            setTimeout(() => msg.classList.remove("show"), 1000);
+        });
+
+        palette.appendChild(box);
+    })
+
+
+    section.appendChild(title);
+    section.appendChild(palette);
+    container.appendChild(section);
+});
+
+</script>
+
+</body>
+</html>

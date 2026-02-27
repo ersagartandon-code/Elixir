@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Elixir Paints</title>
+    <link rel="icon" href="images/f">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -16,11 +18,17 @@
         header { text-align: center; color: white; margin-bottom: 40px; }
         h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); padding-top: 30px;}
         .tagline { font-size: 1.2rem; opacity: 0.9; }
-        .contact {
+        .Nav {
             background: rgba(255,255,255,0.1); padding: 20px;
             border-radius: 10px; margin-bottom: 40px; backdrop-filter: blur(10px);
         }
         a:link
+        {
+            color:white;
+            text-align:center;
+        }
+
+        a:visited
         {
             color:white;
             text-align:center;
@@ -38,7 +46,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            /* transition: all 0.1s ease; */
             opacity: 0;
             transform: translateY(50px);
             position: relative;
@@ -127,9 +135,18 @@
             <p class="tagline">Brushing Dreams to Life • Painting Marvels • Inspiring Possibilities</p>
            
         </header>
+        <div class="Nav">
+                <a><h3 style="text-align: center;color: white;">Products</h3></a>
+        </div>
         <div class="products-grid" id="productsGrid"></div>
         <br>
-         <div class="contact">
+        <!-- <div class="Nav">
+                //<a href=token.html><h3>Dealers Section</h3></a>
+        </div>-->
+        <div class="Nav">
+                <a href=shade.html><h3>Shade Palettes</h3></a>
+        </div>
+                <div class="Nav">
                 <a href=contact.html><h3>Contact us</h3></a>
         </div>
     </div>
@@ -200,7 +217,44 @@
                 "image": "images/wood-filler.jpg",
                 "description": "Flawless wood surface repairs. Fills cracks, holes, dents. Sandable, paintable, stainable for perfect match.",
                 "features": ["Wood Putty", "Fills Imperfections", "Sandable", "Paintable/Stainable"]
+            },
+            {
+                "name": "Home Shield",
+                "type": "Advanced Roof Waterproofing & Cool Roof Sealant",
+                "image": "images/home-shield.jpg",
+               "description": "Home Shield Pro is a high-performance elastomeric membrane that seals roofs against leaks, and thermal extremes. Reflecting 90% of sunlight,",
+               "features": [
+                  "Elastomeric flexibility bridges cracks up to 3mm",
+                  "10-15 year weatherproof guarantee",
+                  "Single-coat application; dries in 4 hours",
+                  "Non-toxic, zero-VOC for family safety"
+              ]
+            },
+            {
+              "name": "WashGuard Distemper",
+             "type": "Acrylic Washable Paint",
+               "image": "images/Distemper.jpg",
+              "description": "WashGuard Distemper offers a silky matte finish with exceptional washability for walls that stay fresh amid daily spills.",
+             "features": [
+                "500+ wash cycles without color loss",
+                "Mould-resistant for bathrooms/kitchens",
+                "Fast-drying (1 hour); minimal odour",
+                "Superior coverage: 12-15 sqm/litre per coat"
+             ]
+            },
+            {
+              "name": "Acrylic Putty",
+              "type": "Premium Wall Skimming Coat",
+              "image": "images/wall-putty.jpg",
+              "description": "SmoothWall Acrylic Putty creates a flawless, porous base for paints on uneven plaster or masonry. Quick-drying and crack-resistant.",
+              "features": [
+                  "Fills imperfections up to 2mm in one coat",
+                  "Breathable to prevent peeling/blistering",
+                  "Dries in 2-4 hours; sands to mirror finish",
+                  "Anti-alkali protection for new walls"
+               ]
             }
+
         ];
 
         function createProductCard(product) {
